@@ -148,9 +148,13 @@ next_year = now.year + 1
 end_of_next_year = datetime(next_year, 12, 31, 23, 59, 59)
 
 for crn, data in crn_data.items():
+    
     print(f"Generating ICS event for CRN: {crn} - {data['course_name']}")
     meeting = data['meeting_info']
-    
+
+    if meeting['startTime'] == None:
+        continue
+
     now = datetime.now()
     start_time = parse_time(meeting['startTime'])
     end_time = parse_time(meeting['endTime'])
